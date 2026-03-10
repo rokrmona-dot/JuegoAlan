@@ -1,33 +1,24 @@
-name: Build Android APK
+[app]
 
-on:
-  workflow_dispatch:
+title = Servicio Social Ashlee
+package.name = serviciosocialashlee
+package.domain = org.test
 
-jobs:
-  build-android:
-    runs-on: ubuntu-22.04
+source.dir = .
+source.include_exts = py,png,jpg,jpeg,kv,atlas,ico
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+version = 0.1
 
-      - name: Pull official Buildozer image
-        run: docker pull ghcr.io/kivy/buildozer:latest
+requirements = python3,kivy
 
-      - name: Build APK with official Buildozer Docker
-        run: |
-          mkdir -p "$HOME/.buildozer"
-          docker run --rm \
-            -v "$HOME/.buildozer:/home/user/.buildozer" \
-            -v "$GITHUB_WORKSPACE:/home/user/hostcwd" \
-            ghcr.io/kivy/buildozer:latest \
-            buildozer android debug
+orientation = portrait
+fullscreen = 0
 
-      - name: Show bin folder
-        run: ls -R bin || true
+icon.filename = Icon.jpeg
 
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: apk
-          path: bin/*.apk
+android.api = 31
+android.minapi = 21
+android.accept_sdk_license = True
+
+[buildozer]
+log_level = 2
