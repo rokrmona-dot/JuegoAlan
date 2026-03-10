@@ -16,9 +16,6 @@ fullscreen = 0
 
 icon.filename = Icon.jpeg
 
-log_level = 2
-warn_on_root = 1
-
 android.api = 31
 android.minapi = 21
 android.accept_sdk_license = True
