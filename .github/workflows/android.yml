@@ -42,9 +42,14 @@ jobs:
             sed -i 's#icon.filename = .*#icon.filename = Icon.jpeg#' buildozer.spec
           fi
 
+      - name: Aceptar licencias Android
+        run: |
+          yes | buildozer android update
+          yes | ~/.buildozer/android/platform/android-sdk/cmdline-tools/latest/bin/sdkmanager --licenses || true
+
       - name: Compilar APK
         run: |
-          buildozer android debug
+          yes | buildozer android debug
 
       - name: Subir APK
         uses: actions/upload-artifact@v4
